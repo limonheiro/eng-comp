@@ -65,7 +65,7 @@ divisao:"/"</tokens><non_terminals>&lt;INICIO&gt;&#13;
 &lt;OPERADORES_L&gt;&#13;
 &lt;OPERADORES_R&gt;</non_terminals><grammar>&lt;INICIO&gt;::=programa &lt;DECLARACAO&gt; &lt;ESTRUTURA&gt; fimprograma;&#13;
 &#13;
-&lt;DECLARACAO&gt;::= inteiro id &lt;DECLARACAO_C&gt; fim_linha;&#13;
+&lt;DECLARACAO&gt;::= inteiro id &lt;DECLARACAO_C&gt; fim_linha|î;&#13;
 &lt;DECLARACAO_C&gt;::= virgula id &lt;DECLARACAO_C&gt;|î;&#13;
 &#13;
 &lt;ESTRUTURA&gt;::= &lt;COMANDO&gt; &lt;LISTA&gt;;&#13;
