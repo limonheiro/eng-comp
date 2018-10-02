@@ -1,5 +1,7 @@
 #ifndef FILA_H_
 #define FILA_H_
+#include <stdlib.h>
+#include <stdio.h>
 typedef struct tNo{
 	char *token;
 	char *lexema;

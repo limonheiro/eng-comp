@@ -20,7 +20,7 @@ int main(int argc, char *argv){
 		verifica(&regexfila,argv[0]);
 	else
 		verfica(&regexfila,argv[1]);
-	else
+
 	if((strcmp(argv[0],"-lt")==0)
 			tabela(&tabelafila);
 	else

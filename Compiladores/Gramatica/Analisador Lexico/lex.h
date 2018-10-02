@@ -24,16 +24,20 @@ void verifica(rfila *fila,char *file){
 	regex_t reg;
 	char *texto;
 	size_t pos_x, pos_y;
-
-	if(regcomp(&reg, fila->regex, REG_EXTENDED|REG_NOSUB)!=0){
+	rNo *aux=fila->first;
+	while(aux!=NULL){
+	if(regcomp(&reg, aux->name_token, REG_EXTENDED|REG_NOSUB)!=0){
 		fprintf(stderr,"erro regcomp\n");
 		exit(1);
 	}
 	if((regexec(&reg, texto, 0, (regmatch_t *)NULL,0)==0)){
-		adcionar(fila, fila->name_token, texto, pos_x, pos_y); 
+		adcionar(fila, aux->name_token, texto, pos_x, pos_y); 
 	}
 	else
-		printf("Erro LEXEMA %i:%i\n", pos_x, pos_y);
+			printf("Erro LEXEMA %li:%li\n", pos_x, pos_y);
+
+	}
+	aux=aux->next;
 }
 
 int adcionar_token(rfila *fila, char *nome_token, char *regex){
