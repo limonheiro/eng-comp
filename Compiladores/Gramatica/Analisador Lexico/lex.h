@@ -3,11 +3,6 @@
 #include <regex.h>
 void tabela(token *token);
 
-void tabela(token *token){
-	size_t linha, coluna;
-	printf("TOKEN\t\tLEXEMA\t\tPosiÃ§Ã£o\n");	
-}
-
 void verifica(char *caminho){	
 	regex_t reg;
 
