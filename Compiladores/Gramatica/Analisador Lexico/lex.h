@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <regex.h>
+
+typedef struct token{
+        char *name_token;
+        char *regex;
+}token;
+
 void tabela(token *token);
 
 void verifica(char *caminho){	
