@@ -2,11 +2,6 @@
 #include <stdlib.h>
 #include <regex.h>
 void tabela(token *token);
-void adcionar_token(char *nome_token, char *regex);
-typedef struct token{
-	char *name_token;
-	char *regex;
-}token;
 
 void tabela(token *token){
 	size_t linha, coluna;
