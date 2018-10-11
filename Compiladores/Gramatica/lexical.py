@@ -15,8 +15,9 @@ def tokenize(code):
 		('senao',r'senao'),
 		('enquanto',r'enquanto'),
 		('programa',r'programa'),
+		('fimprograma',r'fimprograma'),
 		('inteiro',r'inteiro'),
-        ('numero',  r'\d+(\.\d*)?'),  # Integer or decimal number
+        ('numero',  r'[+-]?[0-9]+'),  # Integer or decimal number
 		("fim_linha", r';'),
 		("virgula", r','),
         ('recebe',  r'='),           # Assignment operator
@@ -29,11 +30,10 @@ def tokenize(code):
 		('subtração', r'-'),
 		('multiplicação',r'\*'),
 		('divisão',r'/'),
-		('frase',r'"([A-Za-z0-9_])*"'),
+		('frase',r'".*?"'),
         ('MISMATCH',r'.'),            # Any other character
 		('NEWLINE', r'\n'),			
 		('SKIP',r'[ \t]+'),       # Skip over spaces and tabs
-
     ]
     tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
     line_num = 1
@@ -41,7 +41,7 @@ def tokenize(code):
     for mo in re.finditer(tok_regex, code):
         kind = mo.lastgroup
         value = mo.group(kind)
-        if kind == 'NEWLINE':
+        if (kind == 'NEWLINE'):
             line_start = mo.end()
             line_num += 1
         elif kind == 'SKIP':
@@ -54,7 +54,7 @@ def tokenize(code):
 statements = '''
 programa
 inteiro var1, var2;
-
+escreva("@Digite um valor: ")
 leia(var1);
 var2=1;
 enquanto(var1 > 1){
@@ -64,6 +64,9 @@ enquanto(var1 > 1){
 escreva(var2);
 fimprograma
 '''
-
-for token in tokenize(statements):
-    print(token)
+try:
+	for token in tokenize(statements):
+		print(token)
+		
+except LexerError as err:
+	print('erro ')
