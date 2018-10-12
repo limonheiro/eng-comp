@@ -1,72 +1,78 @@
 import collections
 import re
+import sys
 
-Token = collections.namedtuple('Token', ['typ', 'value', 'linha', 'coluna'])
+Token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
 
 def tokenize(code):
-    token_specification = [
-		('inicio',r'\{'),
-		('fim',r'\}'),
-		('a_parentese',r'\('),
-		('f_parentese',r'\)'),
-		('leia',r'leia'),
-		('escreva',r'escreva'),
-		('se',r'se'),
-		('senao',r'senao'),
-		('enquanto',r'enquanto'),
-		('programa',r'programa'),
-		('fimprograma',r'fimprograma'),
-		('inteiro',r'inteiro'),
-        ('numero',  r'[+-]?[0-9]+'),  # Integer or decimal number
-		("fim_linha", r';'),
-		("virgula", r','),
-        ('recebe',  r'='),           # Assignment operator
-        ('id',r'[A-Za-z]([A-Za-z0-9_])*'),    # Identifiers
-        ('OP',r'[+\-*/]'),      # Arithmetic operators
-        ('WS', r'(\s)+'),           # Line endings
-		('menor', r'<'),
-		('maior', r'>'),
-		('soma', r'\+'),
-		('subtração', r'-'),
-		('multiplicação',r'\*'),
-		('divisão',r'/'),
-		('frase',r'".*?"'),
-        ('MISMATCH',r'.'),            # Any other character
-		('NEWLINE', r'\n'),			
-		('SKIP',r'[ \t]+'),       # Skip over spaces and tabs
+    token_especificacao = [
+		('inicio'       ,r'\{'), #inicio {
+		('fim'          ,r'\}'), # fim }
+		('a_parentese'  ,r'\('), #parentese de abertura
+		('f_parentese'  ,r'\)'), #parentese de fechamento
+		('leia'         ,r'leia'), #leia
+		('escreva'      ,r'escreva'), #escreva
+		('se'           ,r'se'), #se
+		('senao'        ,r'senao'), #senao
+		('enquanto'     ,r'enquanto'), #enquanto
+		('programa'     ,r'programa'), #programa
+		('fimprograma'  ,r'fimprograma'), #fimprograma
+		('inteiro'      ,r'inteiro'),     #variavel
+                ('numero'       ,r'[+-]?[0-9]+'),  # inteiro
+		("fim_linha"    ,r';'), #fim de linha
+		("virgula"      ,r','), # virgula
+                ('recebe'       ,r'='),           # recebe
+                ('id'           ,r'[A-Za-z]([A-Za-z0-9_])*'),    # Id
+                ('subtração'    ,r'\-'),            #subtração
+                ('soma'         ,r'\\+'),           #soma
+                ('multiplicação',r'\*'),            #multiplicação
+                ('divisão'      ,r'/'),             #divisão
+                ('WS'           ,r' +'),           # espaço 
+		('menor'        ,r'<'),             #operadore lógico menor
+		('maior'        ,r'>'),             #operador lógico maior
+		('frase'        ,r'".*?"'),         #frase
+                ('ERRO'         ,r'.'),            # qualquer caracter não identificado
+		('Linha'        ,r'\n'),	    #fim de linha   	
     ]
-    tok_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_specification)
-    line_num = 1
-    line_start = 0
-    for mo in re.finditer(tok_regex, code):
+    ####
+    token_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_especificacao)
+    print(token_regex)
+    linha = 1
+    linha_inicia = 0
+    for mo in re.finditer(token_regex, code):
         kind = mo.lastgroup
         value = mo.group(kind)
-        if (kind == 'NEWLINE'):
-            line_start = mo.end()
-            line_num += 1
-        elif kind == 'SKIP':
+        if (kind == 'Linha'):
+            linha_inicia = mo.end()
+            linha += 1
+        elif kind == 'tab':
             pass
-        elif kind == 'MISMATCH':
-            raise RuntimeError(f'{value!r} unexpected on line {line_num}')
-        column = mo.start() - line_start
-        yield Token(kind, value, line_num, column)
-
-statements = '''
-programa
-inteiro var1, var2;
-escreva("@Digite um valor: ")
-leia(var1);
-var2=1;
-enquanto(var1 > 1){
- var2 = var1 * var2 ;
- var1 = var1 - 1;
-}
-escreva(var2);
-fimprograma
-'''
-try:
-	for token in tokenize(statements):
-		print(token)
-		
-except LexerError as err:
-	print('erro ')
+        elif kind == 'ERRO':
+            print(f'########################################################')
+            print(f'{value!r} não esperado na linha {linha_inicia} e coluna {coluna}')
+            print(f'########################################################')
+            if value == '"':
+                print(f'" de fechamento não encontrada')
+            else:
+                print(f'caracter desconhecido')
+            pass
+        coluna = mo.start() - linha_inicia
+        if (kind != 'ERRO') and (kind != 'Linha') and (kind != 'WS'):
+            yield Token(kind, value, linha, coluna)
+def main():
+    #python3 -lt filename.isa
+    if sys.argv[2] != '':
+        argumento = sys.argv[1]
+        arquivo = sys.argv[2]
+        file = open(arquivo,"r")
+        statements = file.read()
+        if argumento == '-lt':
+            for token in tokenize(statements):
+                print(token)
+    else:
+        arquivo = sys.argv[1]
+        file = open(arquivo,"r")
+        statements = file.read()
+        tokenize(statements)
+#executa a função main()
+main()
