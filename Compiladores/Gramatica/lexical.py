@@ -36,7 +36,6 @@ def tokenize(code):
     ]
     ####
     token_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_especificacao)
-    print(token_regex)
     linha = 1
     linha_inicia = 0
     for mo in re.finditer(token_regex, code):
@@ -59,20 +58,3 @@ def tokenize(code):
         coluna = mo.start() - linha_inicia
         if (kind != 'ERRO') and (kind != 'Linha') and (kind != 'WS'):
             yield Token(kind, value, linha, coluna)
-def main():
-    #python3 -lt filename.isa
-    if sys.argv[2] != '':
-        argumento = sys.argv[1]
-        arquivo = sys.argv[2]
-        file = open(arquivo,"r")
-        statements = file.read()
-        if argumento == '-lt':
-            for token in tokenize(statements):
-                print(token)
-    else:
-        arquivo = sys.argv[1]
-        file = open(arquivo,"r")
-        statements = file.read()
-        tokenize(statements)
-#executa a função main()
-main()
