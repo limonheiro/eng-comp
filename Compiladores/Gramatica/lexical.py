@@ -1,8 +1,12 @@
 import collections
 import re
-import sys
 
 Token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
+def __help__():
+    print("python3.7 main.py [comando] arquivo")
+    print("lista de comandos:")
+    print("-h: mostra esta mensagem")
+    print("-lt: mostra a tabela de token.")
 
 def tokenize(code):
     token_especificacao = [
