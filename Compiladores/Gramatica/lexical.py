@@ -1,14 +1,8 @@
 import collections
 import re
 
-Token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
-def __help__():
-    print("python3.7 main.py [comando] arquivo")
-    print("lista de comandos:")
-    print("-h: mostra esta mensagem")
-    print("-lt: mostra a tabela de token.")
-
 def tokenize(code):
+    Token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
     token_especificacao = [
 		('inicio'       ,r'\{'), #inicio {
 		('fim'          ,r'\}'), # fim }
@@ -22,20 +16,20 @@ def tokenize(code):
 		('programa'     ,r'programa'), #programa
 		('fimprograma'  ,r'fimprograma'), #fimprograma
 		('inteiro'      ,r'inteiro'),     #variavel
-                ('numero'       ,r'[+-]?[0-9]+'),  # inteiro
+        ('numero'       ,r'[+-]?[0-9]+'),  # inteiro
 		("fim_linha"    ,r';'), #fim de linha
 		("virgula"      ,r','), # virgula
-                ('recebe'       ,r'='),           # recebe
-                ('id'           ,r'[A-Za-z]([A-Za-z0-9_])*'),    # Id
-                ('subtração'    ,r'\-'),            #subtração
-                ('soma'         ,r'\\+'),           #soma
-                ('multiplicação',r'\*'),            #multiplicação
-                ('divisão'      ,r'/'),             #divisão
-                ('WS'           ,r' +'),           # espaço 
+        ('recebe'       ,r'='),           # recebe
+        ('id'           ,r'[A-Za-z]([A-Za-z0-9_])*'),    # Id
+        ('subtração'    ,r'\-'),            #subtração
+        ('soma'         ,r'\\+'),           #soma
+        ('multiplicação',r'\*'),            #multiplicação
+        ('divisão'      ,r'/'),             #divisão
+        ('WS'           ,r' +'),           # espaço
 		('menor'        ,r'<'),             #operadore lógico menor
 		('maior'        ,r'>'),             #operador lógico maior
 		('frase'        ,r'".*?"'),         #frase
-                ('ERRO'         ,r'.'),            # qualquer caracter não identificado
+        ('ERRO'         ,r'.'),            # qualquer caracter não identificado
 		('Linha'        ,r'\n'),	    #fim de linha   	
     ]
     ####
@@ -52,7 +46,7 @@ def tokenize(code):
             pass
         elif kind == 'ERRO':
             print(f'########################################################')
-            print(f'{value!r} não esperado na linha {linha_inicia} e coluna {coluna}')
+            print(f'{value!r} não esperado na linha {linha} e coluna {coluna}')
             print(f'########################################################')
             if value == '"':
                 print(f'" de fechamento não encontrada')
