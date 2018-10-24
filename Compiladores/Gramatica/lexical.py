@@ -1,6 +1,10 @@
 import collections
 import re
+from cachetools import cached,TTLCache
 
+cache = TTLCache(maxsize=40, ttl=300)
+
+@cached(cache)
 def tokenize(code):
     Token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
     token_especificacao = [
@@ -37,22 +41,22 @@ def tokenize(code):
     linha = 1
     linha_inicia = 0
     for mo in re.finditer(token_regex, code):
-        kind = mo.lastgroup
-        value = mo.group(kind)
-        if (kind == 'Linha'):
+        tipo = mo.lastgroup
+        valor = mo.group(tipo)
+        if (tipo == 'Linha'):
             linha_inicia = mo.end()
             linha += 1
-        elif kind == 'tab':
+        elif tipo == 'tab':
             pass
-        elif kind == 'ERRO':
+        elif tipo == 'ERRO':
             print(f'########################################################')
-            print(f'{value!r} não esperado na linha {linha} e coluna {coluna}')
+            print(f'{valor!r} não esperado na linha {linha} e coluna {coluna}')
             print(f'########################################################')
-            if value == '"':
+            if valor == '"':
                 print(f'" de fechamento não encontrada')
             else:
                 print(f'caracter desconhecido')
             pass
         coluna = mo.start() - linha_inicia
-        if (kind != 'ERRO') and (kind != 'Linha') and (kind != 'WS'):
-            yield Token(kind, value, linha, coluna)
+        if (tipo != 'ERRO') and (tipo != 'Linha') and (tipo != 'WS'):
+            yield Token(tipo, valor, linha, coluna)
