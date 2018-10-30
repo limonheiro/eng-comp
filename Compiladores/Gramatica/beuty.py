@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup
-from cachetools import cached,TTLCache
+from sintatico import analisadorsintatico
 
-cache = TTLCache(maxsize=40, ttl=300)
 
-def beut(tabela1,tabela2):
+def beut(tabela1, tabela2):
     with open('tabela.html', 'r') as file:
         soup = BeautifulSoup(file, "html5lib")
         soup.prettify()
@@ -13,36 +12,43 @@ def beut(tabela1,tabela2):
         coluna1 = tabela_all[0].find_all('tr')
         coluna2 = tabela_all[1].find_all('tr')
 
-        valores_return(coluna1,tabela1)
-        valores_return(coluna2,tabela2)
+        valores_return(coluna1, tabela1)
+        valores_return(coluna2, tabela2)
 
-def valores_return(colunas,tabela):
+
+def valores_return(colunas, tabela):
     for coluna in colunas:
         celula = coluna.find_all('td')
         celula = [ele.text.strip() for ele in celula]
         tabela.append([ele for ele in celula if ele])
 
+
 def separar(palavra):
-    numero=[]
+    numero = []
     for word in palavra:
         if word.isdigit():
-            numero+=word
+            numero += word
     return (''.join(numero))
-@cached(cache)
-def init_sintatico():
-    tabela1=[]
-    tabela2=[]
-    beut(tabela1,tabela2)
-    topo=tabela1[0]
+
+
+def initsintatico(token):
+    tabela1 = []
+    tabela2 = []
+    beut(tabela1, tabela2)
+    topo = tabela1[0]
     del tabela1[0]
-    dict_tabela1={}
-    dict_tabela2={}
+    dict_tabela1 = {}
+    dict_tabela2 = {}
     for colunas in tabela1:
-        i=0;
+        i = 0;
         for coluna in colunas:
             if coluna.isdigit() and i <= len(topo):
-                dict_tabela1[(colunas[0],topo[i-1])]=[coluna]
+                dict_tabela1[(colunas[0], topo[i - 1])] = [int(coluna)]
             i += 1
 
     for i in range(len(tabela2)):
-        dict_tabela2[int(separar(tabela2[i][0]))] = [((tabela2[i][1]).split('::= '))[1]]
+        if ((((tabela2[i][1]).split('::= '))[1]).split(" ")[0] != 'î'):
+            dict_tabela2[int(separar(tabela2[i][0]))] = ((((tabela2[i][1]).split('::= '))[1]).split())
+        else:
+            dict_tabela2[int(separar(tabela2[i][0]))] = []
+    analisadorsintatico(dict_tabela1, dict_tabela2, token)

@@ -25,10 +25,10 @@ def tokenize(code):
 		("virgula"      ,r','), # virgula
         ('recebe'       ,r'='),           # recebe
         ('id'           ,r'[A-Za-z]([A-Za-z0-9_])*'),    # Id
-        ('subtração'    ,r'\-'),            #subtração
+        ('subtracao'    ,r'\-'),            #subtração
         ('soma'         ,r'\\+'),           #soma
-        ('multiplicação',r'\*'),            #multiplicação
-        ('divisão'      ,r'/'),             #divisão
+        ('multiplicacao',r'\*'),            #multiplicação
+        ('divisao'      ,r'/'),             #divisão
         ('WS'           ,r' +'),           # espaço
 		('menor'        ,r'<'),             #operadore lógico menor
 		('maior'        ,r'>'),             #operador lógico maior

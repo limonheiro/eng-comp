@@ -1,14 +1,13 @@
-def main():
-    parser = argparse.ArgumentParser(description='Compilador para um linguagem do tipo LL(1)')
-    parser.add_argument("-lt", help="Exibe a listagem de tokens e lexemas segundo a sua posição",dest="lexico")
-    parser.add_argument("codigo", type=str, help="Codigo fonte")
-    args=parser.parse_args()
+def main(token):
+    #parser = argparse.ArgumentParser(description='Compilador para um linguagem do tipo LL(1)')
+    #parser.add_argument("-lt", help="Exibe a listagem de tokens e suas posição", action='store', default=False)
+    #parser.add_argument("codigo", type=str, help="Codigo fonte", action='store', default=False)
+    #args=parser.parse_args()
     #python3 -lt filename.isa
-    if args.lexico:
-        file = open(args.lexico,"r")
+    if len(sys.argv)>=3:
+        file = open(sys.argv[2],"r")
         arquivo = file.read()
         file.close()
-        token=[]
         print('{:15}'.format('Token'), '{:29}'.format('Lexema'), '{:10}'.format('Linha'),'{:10}'.format('Coluna'))
         i = 0
         for tok in lexical.tokenize(arquivo):
@@ -17,18 +16,21 @@ def main():
                 i += 1
 
     else:
-        file = open(args.codigo,"r")
+        file = open(sys.argv[1],"r")
         arquivo = file.read()
         file.close()
-        token=[]
         for tok in lexical.tokenize(arquivo):
             token.append(tok)
+    return token
+
 #executa a funcao main()
-
-
 if __name__ == "__main__":
-    import argparse
+    import sys
     import lexical
-    from beuty import init_sintatico
-    main()
-    init_sintatico()
+    token=[]
+    from beuty import initsintatico
+    main(token)
+    #print(len(token))
+    initsintatico(token)
+
+
