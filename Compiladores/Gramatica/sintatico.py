@@ -1,4 +1,4 @@
-def analisadorsintatico(dict1, dict2, programa):
+def analisadorsintatico(dict1, dict2, programa, args):
     pilha = ["<INICIO>"]
     i=0
     while(i <= (len(programa)-1)):
@@ -8,7 +8,8 @@ def analisadorsintatico(dict1, dict2, programa):
         else:
             if((pilha[-1],programa[i][0]) in dict1):
                 if(dict2[dict1[pilha[-1],programa[i][0]][0]] != []):
-                    print(dict1[pilha[-1],programa[i][0]][0],dict2[dict1[pilha[-1],programa[i][0]][0]])
+                    if(args):
+                        print(dict1[pilha[-1],programa[i][0]][0],dict2[dict1[pilha[-1],programa[i][0]][0]])
                 exp=dict2[dict1[pilha[-1], programa[i][0]][0]]
                 if(exp == []):
                     a=pilha.pop()

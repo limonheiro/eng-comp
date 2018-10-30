@@ -31,7 +31,7 @@ def separar(palavra):
     return (''.join(numero))
 
 
-def initsintatico(token):
+def initsintatico(token, args):
     tabela1 = []
     tabela2 = []
     beut(tabela1, tabela2)
@@ -51,4 +51,4 @@ def initsintatico(token):
             dict_tabela2[int(separar(tabela2[i][0]))] = ((((tabela2[i][1]).split('::= '))[1]).split())
         else:
             dict_tabela2[int(separar(tabela2[i][0]))] = []
-    analisadorsintatico(dict_tabela1, dict_tabela2, token)
+    analisadorsintatico(dict_tabela1, dict_tabela2, token, args)

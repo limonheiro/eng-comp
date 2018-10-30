@@ -1,12 +1,7 @@
 import collections
 import re
-from cachetools import cached,TTLCache
-
-cache = TTLCache(maxsize=40, ttl=300)
-
-@cached(cache)
 def tokenize(code):
-    Token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
+    token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
     token_especificacao = [
 		('inicio'       ,r'\{'), #inicio {
 		('fim'          ,r'\}'), # fim }
@@ -59,4 +54,4 @@ def tokenize(code):
             pass
         coluna = mo.start() - linha_inicia
         if (tipo != 'ERRO') and (tipo != 'Linha') and (tipo != 'WS'):
-            yield Token(tipo, valor, linha, coluna)
+            yield token(tipo, valor, linha, coluna)
