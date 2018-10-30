@@ -4,22 +4,13 @@ def opction(args,token):
         ls(token,True)
     elif(args.ls):
         import lexical
-        file = open(args.codigo, "r")
-        arquivo = file.read()
-        file.close()
-        for tok in lexical.tokenize(arquivo):
-            token.append(tok)
+        lt(args.codigo, token)
         ls(token,args.ls)
     elif(args.lt):
         vlt(args.codigo,token)
         ls(token, args.ls)
     else:
-        import lexical
-        file = open(args.codigo, "r")
-        arquivo = file.read()
-        file.close()
-        for tok in lexical.tokenize(arquivo):
-            token.append(tok)
+        lt(args.codigo, token)
         ls(token,args.ls)
 
 def vlt(filename,token):
@@ -34,6 +25,13 @@ def vlt(filename,token):
         print('{:15}'.format(token[i][0]), '{:20.11}'.format(token[i][1]), '{:10}'.format(token[i][2]),
               '{:10}'.format(token[i][3]))
         i += 1
+def lt(filename, token):
+    import lexical
+    file = open(filename, "r")
+    arquivo = file.read()
+    file.close()
+    for tok in lexical.tokenize(arquivo):
+        token.append(tok)
 def ls(token,args):
     from beuty import initsintatico
     initsintatico(token,args)

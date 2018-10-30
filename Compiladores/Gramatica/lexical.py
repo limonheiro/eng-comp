@@ -1,5 +1,6 @@
 import collections
 import re
+from colorama import Fore, Back, Style
 def tokenize(code):
     token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
     token_especificacao = [
@@ -31,7 +32,7 @@ def tokenize(code):
         ('ERRO'         ,r'.'),            # qualquer caracter não identificado
 		('Linha'        ,r'\n'),	    #fim de linha   	
     ]
-    ####
+
     token_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_especificacao)
     linha = 1
     linha_inicia = 0
@@ -44,9 +45,12 @@ def tokenize(code):
         elif tipo == 'tab':
             pass
         elif tipo == 'ERRO':
-            print(f'########################################################')
+            t=Fore.BLACK+Back.CYAN+'########################################################'
+            print(t)
             print(f'{valor!r} não esperado na linha {linha} e coluna {coluna}')
-            print(f'########################################################')
+            print(t)
+            print(f'Erro lexico')
+            print(Style.RESET_ALL)
             if valor == '"':
                 print(f'" de fechamento não encontrada')
             else:
