@@ -24,6 +24,7 @@ def analisadorsintatico(dict1, dict2, programa, args):
                 print(t)
                 print(programa[i])
                 print(Style.RESET_ALL)
+                args=False
                 break
     if(args):
         print("Sintatico terminado com Sucesso")

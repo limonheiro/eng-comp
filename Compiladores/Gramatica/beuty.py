@@ -1,8 +1,5 @@
-from bs4 import BeautifulSoup
-from sintatico import analisadorsintatico
-
-
 def beut(tabela1, tabela2):
+    from bs4 import BeautifulSoup
     with open('tabela.html', 'r') as file:
         soup = BeautifulSoup(file, "html5lib")
         soup.prettify()
@@ -22,7 +19,6 @@ def valores_return(colunas, tabela):
         celula = [ele.text.strip() for ele in celula]
         tabela.append([ele for ele in celula if ele])
 
-
 def separar(palavra):
     numero = []
     for word in palavra:
@@ -30,8 +26,8 @@ def separar(palavra):
             numero += word
     return (''.join(numero))
 
-
 def initsintatico(token, args):
+    from sintatico import analisadorsintatico
     tabela1 = []
     tabela2 = []
     beut(tabela1, tabela2)
