@@ -22,7 +22,7 @@ def tokenize(code):
         ('recebe'       ,r'='),           # recebe
         ('id'           ,r'[A-Za-z]([A-Za-z0-9_])*'),    # Id
         ('subtracao'    ,r'\-'),            #subtração
-        ('soma'         ,r'\\+'),           #soma
+        ('soma'         ,r'\+'),           #soma
         ('multiplicacao',r'\*'),            #multiplicação
         ('divisao'      ,r'/'),             #divisão
         ('WS'           ,r' +'),           # espaço

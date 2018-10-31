@@ -1,12 +1,7 @@
 def semantic(token):
     variaveis(token)
     divisao(token)
-    recebe(token)
-def recebe(token):
-    for i in range(len(token)):
-        if 'recebe' in token[i] and 'frase' in token[i+1]:
-            Erro()
-            print(f'Divisão por zero: '+reset(token[i+1]))
+    
 def divisao(token):
     for i in range(len(token)):
         if 'divisao' in token[i] and '0' in token[i+1]:

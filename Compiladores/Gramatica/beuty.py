@@ -14,6 +14,7 @@ def beut(tabela1, tabela2):
 
 
 def valores_return(colunas, tabela):
+
     for coluna in colunas:
         celula = coluna.find_all('td')
         celula = [ele.text.strip() for ele in celula]
@@ -27,7 +28,22 @@ def separar(palavra):
     return (''.join(numero))
 
 def initsintatico(token, args):
+    import os
+    if not(os.path.isfile('dicionario1.dtc')and os.path.isfile('dicionario2.dtc')):
+        save()
+
     from sintatico import analisadorsintatico
+    dict_tabela1=load("dicionario1.dtc")
+    dict_tabela2 = load("dicionario2.dtc")
+
+    analisadorsintatico(dict_tabela1, dict_tabela2, token, args)
+
+def load(filename):
+    import pickle
+    file = open(filename, "rb")
+    return pickle.load(file)
+
+def save():
     tabela1 = []
     tabela2 = []
     beut(tabela1, tabela2)
@@ -41,10 +57,16 @@ def initsintatico(token, args):
             if coluna.isdigit() and i <= len(topo):
                 dict_tabela1[(colunas[0], topo[i - 1])] = [int(coluna)]
             i += 1
-
     for i in range(len(tabela2)):
         if ((((tabela2[i][1]).split('::= '))[1]).split(" ")[0] != 'î'):
             dict_tabela2[int(separar(tabela2[i][0]))] = ((((tabela2[i][1]).split('::= '))[1]).split())
         else:
             dict_tabela2[int(separar(tabela2[i][0]))] = []
-    analisadorsintatico(dict_tabela1, dict_tabela2, token, args)
+    saveFile(dict_tabela1,"dicionario1.dtc")
+    saveFile(dict_tabela2,"dicionario2.dtc")
+
+def saveFile(dict,filename):
+    import pickle
+    dicionario = open(filename, "wb")
+    pickle.dump(dict, dicionario)
+    dicionario.close()

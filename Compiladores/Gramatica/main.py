@@ -5,7 +5,7 @@ def main():
     parser.add_argument("-ls", help="Show sintatix List", action='store_true')
     parser.add_argument("-lse", help="Show log semantic", action='store_true')
     parser.add_argument("filename", type=str, help="Filename")
-    parser.add_argument('-tudo', help='Show all', action='store_true')
+    parser.add_argument('-tudo', help='Show all logs', action='store_true')
     args=parser.parse_args()
 
     opction(args)

@@ -3,12 +3,15 @@ def opction(args):
     if args.tudo:
         vlt(args.filename, token)
         ls(token,True)
+        lse(token)
     elif(args.ls):
         lt(args.filename, token)
         ls(token,args.ls)
+        lse(token)
     elif(args.lt):
         vlt(args.filename,token)
         ls(token, args.ls)
+        lse(token)
     elif(args.lse):
         lt(args.filename, token)
         ls(token, args.ls)
@@ -16,6 +19,7 @@ def opction(args):
     else:
         lt(args.filename, token)
         ls(token,args.ls)
+        lse(token)
 
 def vlt(filename,token):
     from lexical import tokenize
