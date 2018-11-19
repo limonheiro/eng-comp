@@ -2,7 +2,7 @@ def beut(tabela1, tabela2):
     from bs4 import BeautifulSoup
     with open('tabela.html', 'r') as file:
         soup = BeautifulSoup(file, "html5lib")
-        soup.prettify()
+        soup.prettify()#reorganiza as tags
 
         tabela_all = soup.find_all('tbody')
 
@@ -33,9 +33,8 @@ def initsintatico(token, args):
         save()
 
     from sintatico import analisadorsintatico
-    dict_tabela1=load("dicionario1.dtc")
+    dict_tabela1 = load("dicionario1.dtc")
     dict_tabela2 = load("dicionario2.dtc")
-
     analisadorsintatico(dict_tabela1, dict_tabela2, token, args)
 
 def load(filename):
@@ -51,21 +50,21 @@ def save():
     del tabela1[0]
     dict_tabela1 = {}
     dict_tabela2 = {}
-    for colunas in tabela1:
+    for linhas in tabela1:
         i = 0;
-        for coluna in colunas:
-            if coluna.isdigit() and i <= len(topo):
-                dict_tabela1[(colunas[0], topo[i - 1])] = [int(coluna)]
+        for linha in linhas:
+            if linha.isdigit() and i <= len(topo):
+                dict_tabela1[(linhas[0], topo[i - 1])] = [int(linha)]
             i += 1
     for i in range(len(tabela2)):
-        if ((((tabela2[i][1]).split('::= '))[1]).split(" ")[0] != 'î'):
+        if (((tabela2[i][1]).split('::= '))[1]).split(" ")[0] != 'î':
             dict_tabela2[int(separar(tabela2[i][0]))] = ((((tabela2[i][1]).split('::= '))[1]).split())
         else:
             dict_tabela2[int(separar(tabela2[i][0]))] = []
-    saveFile(dict_tabela1,"dicionario1.dtc")
-    saveFile(dict_tabela2,"dicionario2.dtc")
+    saveFile(dict_tabela1, "dicionario1.dtc")
+    saveFile(dict_tabela2, "dicionario2.dtc")
 
-def saveFile(dict,filename):
+def saveFile(dict, filename):
     import pickle
     dicionario = open(filename, "wb")
     pickle.dump(dict, dicionario)

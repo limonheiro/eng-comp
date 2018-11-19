@@ -1,24 +1,23 @@
 import collections
 import re
-from colorama import Fore, Back, Style
-def tokenize(code):
+def tokenize(code,args):
     token = collections.namedtuple('Token', ['tipo', 'lexema', 'linha', 'coluna'])
     token_especificacao = [
-		('inicio'       ,r'\{'), #inicio {
-		('fim'          ,r'\}'), # fim }
-		('a_parentese'  ,r'\('), #parentese de abertura
-		('f_parentese'  ,r'\)'), #parentese de fechamento
-		('leia'         ,r'leia'), #leia
-		('escreva'      ,r'escreva'), #escreva
-		('se'           ,r'se'), #se
-		('senao'        ,r'senao'), #senao
-		('enquanto'     ,r'enquanto'), #enquanto
-		('programa'     ,r'programa'), #programa
-		('fimprograma'  ,r'fimprograma'), #fimprograma
-		('inteiro'      ,r'inteiro'),     #variavel
+        ('inicio'       ,r'\{'), #inicio {
+        ('fim'          ,r'\}'), # fim }
+        ('a_parentese'  ,r'\('), #parentese de abertura
+        ('f_parentese'  ,r'\)'), #parentese de fechamento
+        ('leia'         ,r'leia'), #leia
+        ('escreva'      ,r'escreva'), #escreva
+        ('se'           ,r'se'), #se
+        ('senao'        ,r'senao'), #senao
+        ('enquanto'     ,r'enquanto'), #enquanto
+        ('programa'     ,r'programa'), #programa
+        ('fimprograma'  ,r'fimprograma'), #fimprograma
+        ('inteiro'      ,r'inteiro'),     #variavel
         ('numero'       ,r'[+-]?[0-9]+'),  # inteiro
-		("fim_linha"    ,r';'), #fim de linha
-		("virgula"      ,r','), # virgula
+        ("fim_linha"    ,r';'), #fim de linha
+        ("virgula"      ,r','), # virgula
         ('recebe'       ,r'='),           # recebe
         ('id'           ,r'[A-Za-z]([A-Za-z0-9_])*'),    # Id
         ('subtracao'    ,r'\-'),            #subtração
@@ -26,11 +25,11 @@ def tokenize(code):
         ('multiplicacao',r'\*'),            #multiplicação
         ('divisao'      ,r'/'),             #divisão
         ('WS'           ,r' +'),           # espaço
-		('menor'        ,r'<'),             #operadore lógico menor
-		('maior'        ,r'>'),             #operador lógico maior
-		('frase'        ,r'".*?"'),         #frase
+        ('menor'        ,r'<'),             #operadore lógico menor
+        ('maior'        ,r'>'),             #operador lógico maior
+        ('frase'        ,r'".*?"'),         #frase
         ('ERRO'         ,r'.'),            # qualquer caracter não identificado
-		('Linha'        ,r'\n'),	    #fim de linha   	
+        ('Linha'        ,r'\n'),	    #fim de linha
     ]
 
     token_regex = '|'.join('(?P<%s>%s)' % pair for pair in token_especificacao)
@@ -45,15 +44,16 @@ def tokenize(code):
         elif tipo == 'tab':
             pass
         elif tipo == 'ERRO':
-            t=Fore.BLACK+Back.CYAN+'########################################################'
+
+            from colorama import Fore, Style
+            t=Fore.CYAN+'########################################################'
             print(t)
             print(f'{valor!r} não esperado na linha {linha} e coluna {coluna}\a\a')
             print(t)
             print(f'Erro lexico')
-
+            args.lt=False
             if valor == '"':
-                print(f'" de fechamento não encontrada')
-                print(Style.RESET_ALL)
+                print(f'" de fechamento não encontrada'+Style.RESET_ALL)
             else:
                 print(f'caracter desconhecido')
                 print(Style.RESET_ALL)
