@@ -1,0 +1,103 @@
+/* Lógico_1: */
+
+CREATE TABLE Aluno (
+    AlunoNome VARCHAR,
+    Cpf DECIMAL PRIMARY KEY,
+    e_mail VARCHAR,
+    rua VARCHAR,
+    cep VARCHAR,
+    bairro VARCHAR,
+    cidade VARCHAR,
+    estado VARCHAR
+);
+
+CREATE TABLE Curso (
+    codigo DECIMAL PRIMARY KEY,
+    CursoNome VARCHAR,
+    fk_Departamento_DepartamentoCodigo DECIMAL
+);
+
+CREATE TABLE Disciplina (
+    DisciplinaNome VARCHAR,
+    DisciplinaCodigo DECIMAL PRIMARY KEY,
+    fk_Professor_Cpf DECIMAL
+);
+
+CREATE TABLE Professor (
+    estado VARCHAR,
+    cidade VARCHAR,
+    bairro VARCHAR,
+    cep DECIMAL,
+    rua VARCHAR,
+    e_mail VARCHAR,
+    Cpf DECIMAL PRIMARY KEY,
+    ProfessorNome VARCHAR,
+    fk_Departamento_DepartamentoCodigo DECIMAL,
+    data_contratacao DATE
+);
+
+CREATE TABLE Departamento (
+    DepartamentoNome VARCHAR,
+    DepartamentoCodigo DECIMAL PRIMARY KEY
+);
+
+CREATE TABLE matricula (
+    fk_Aluno_Cpf DECIMAL,
+    fk_Curso_codigo DECIMAL,
+    data_matricula DATE
+);
+
+CREATE TABLE cursa (
+    fk_Aluno_Cpf DECIMAL,
+    fk_Disciplina_DisciplinaCodigo DECIMAL
+);
+
+CREATE TABLE tem (
+    fk_Disciplina_DisciplinaCodigo DECIMAL,
+    fk_Curso_codigo DECIMAL
+);
+ 
+ALTER TABLE Curso ADD CONSTRAINT FK_Curso_2
+    FOREIGN KEY (fk_Departamento_DepartamentoCodigo)
+    REFERENCES Departamento (DepartamentoCodigo)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Disciplina ADD CONSTRAINT FK_Disciplina_2
+    FOREIGN KEY (fk_Professor_Cpf)
+    REFERENCES Professor (Cpf)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Professor ADD CONSTRAINT FK_Professor_2
+    FOREIGN KEY (fk_Departamento_DepartamentoCodigo)
+    REFERENCES Departamento (DepartamentoCodigo)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE matricula ADD CONSTRAINT FK_matricula_1
+    FOREIGN KEY (fk_Aluno_Cpf)
+    REFERENCES Aluno (Cpf)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE matricula ADD CONSTRAINT FK_matricula_2
+    FOREIGN KEY (fk_Curso_codigo)
+    REFERENCES Curso (codigo)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE cursa ADD CONSTRAINT FK_cursa_1
+    FOREIGN KEY (fk_Aluno_Cpf)
+    REFERENCES Aluno (Cpf)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE cursa ADD CONSTRAINT FK_cursa_2
+    FOREIGN KEY (fk_Disciplina_DisciplinaCodigo)
+    REFERENCES Disciplina (DisciplinaCodigo)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_1
+    FOREIGN KEY (fk_Disciplina_DisciplinaCodigo)
+    REFERENCES Disciplina (DisciplinaCodigo)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_2
+    FOREIGN KEY (fk_Curso_codigo)
+    REFERENCES Curso (codigo)
+    ON DELETE SET NULL;
