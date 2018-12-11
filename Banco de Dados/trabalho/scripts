@@ -1,0 +1,95 @@
+select * from public.disciplina
+inner join cursa 
+on  disciplina.disciplinacodigo = cursa.fk_disciplina_disciplinacodigo; 
+
+Retorna os alunos matriculados na disciplina e os professores que ministram ela
+#################################################################################
+select disciplina.disciplinanome, professor.professornome from public.disciplina 
+inner join professor
+on disciplina.fk_professor_cpf = professor.cpf
+
+Retorna qual professor faz a disciplina pelo cpf e , e mostra a disciplina e nome do professor
+#################################################################################
+
+select * from aluno 
+inner join matricula 
+on matricula.fk_aluno_cpf = aluno.cpf
+where fk_curso_codigo = (select curso.codigo curso from departamento
+inner join 	curso
+on curso.fk_departamento_departamentocodigo = departamentocodigo
+where departamentocodigo = 35)
+
+Retorna os aluno a partido do codigo do departamento
+##########################################################################################
+select * from aluno
+inner join cursa 
+on cursa.fk_aluno_cpf=aluno.cpf
+where fk_disciplina_disciplinacodigo = (select disciplina.disciplinacodigo disciplina from professor
+inner join disciplina
+on disciplina.fk_professor_cpf = professor.cpf
+where professornome = 'Ronaldinho Gaucho'
+)
+Retorno os alunos que tem aula com um professor especifico
+#############################################################################################
+select * from departamento
+inner join professor
+on professor.fk_departamento_departamentocodigo = departamento.departamentocodigo
+#############################################################################################
+select professor.professornome professor from departamento
+inner join professor
+on professor.fk_departamento_departamentocodigo = departamento.departamentocodigo
+where departamentonome = ('DAI')
+retorna do relacionamento curso e departamento onde o atributo departamentonome é igual a DAI
+#############################################################################################
+select * from professor
+inner join disciplina
+on disciplina.fk_professor_cpf = professor.cpf
+inner join departamento
+on departamento.departamentocodigo = professor.fk_departamento_departamentocodigo
+########################################################################################
+
+select * from aluno
+inner join matricula 
+on matricula.fk_aluno_cpf = aluno.cpf
+inner join cursa 
+on cursa.fk_aluno_cpf=aluno.cpf
+########################################################################################
+select * from aluno
+left join cursa 
+on cursa.fk_aluno_cpf=aluno.cpf
+where fk_disciplina_disciplinacodigo is NULL 
+retorna quem não está em nenhuma disciplina
+#########################################################################################
+select * from disciplina
+inner join tem
+on disciplina.disciplinacodigo=tem.fk_disciplina_disciplinacodigo
+inner join professor
+on disciplina.fk_professor_cpf = professor.cpf
+inner join cursa
+on disciplina.disciplinacodigo=cursa.fk_disciplina_disciplinacodigo
+##########################################################################################
+
+***
+	select * from curso
+	inner join departamento
+	on curso.fk_departamento_departamentocodigo=departamento.departamentocodigo
+***#
+	select * from cursa
+	inner join aluno
+	on cursa.fk_aluno_cpf=aluno.cpf
+	inner join disciplina
+	on cursa.fk_disciplina_disciplinacodigo=disciplina.disciplinacodigo
+***
+	select * from professor
+	full  join departamento
+	on professor.fk_departamento_departamentocodigo= departamento.departamentocodigo
+***
+	select  count(professor.cpf) AS numero_de_professores from departamento
+	inner join professor
+	on professor.fk_departamento_departamentocodigo = departamento.departamentocodigo
+	inner join curso
+	on curso.fk_departamento_departamentocodigo = departamento.departamentocodigo
+***
+select * from curso
+inner join matricula
+on matricula.fk_curso_codigo = curso.codigo
