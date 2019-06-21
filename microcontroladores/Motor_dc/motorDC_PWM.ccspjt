@@ -1,0 +1,19 @@
+[PROJECT]
+Target=motorDC_PWM.hex
+Processor_Text=PIC16F877A
+CCSVersion=5.008
+Compiler=PCM
+[Target Data]
+FileList=motorDC_PWM.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[motorDC_PWM.c]
+Type=4
+[mru-list]
+1=motorDC_PWM.c
+[Units]
+Count=1
+1=motorDC_PWM (main)
+[Opened Files]
+1=motorDC_PWM.c
+2=

@@ -1,0 +1,52 @@
+#include <main.h>
+
+#include <LCD.C>
+
+#INT_RTCC
+void  RTCC_isr(void) 
+{
+
+}
+#define LCD_ENABLE_PIN PIN_B2
+#define LCD_RS_PIN PIN_B1
+#define LCD_RW_PIN PIN_B0
+#define LCD_DATA4 PIN_B3
+#define LCD_DATA5 PIN_B4
+#define LCD_DATA6 PIN_B5
+#define LCD_DATA7 PIN_B6
+
+#include <lcd.c>
+
+void main()
+{
+   char k;
+
+   setup_adc_ports(AN0);
+   setup_timer_2(T2_DIV_BY_16,255,1);      //819 us overflow, 819 us interrupt
+
+   setup_ccp1(CCP_PWM);
+   set_pwm1_duty((int16)510);
+   lcd_init();
+
+   enable_interrupts(INT_RTCC);
+   enable_interrupts(GLOBAL);
+
+   lcd_init();
+   delay_ms(10);
+
+   lcd_putc("\fReady...\n");
+
+   while(TRUE)
+   {
+      k = "1\0";
+      //k = kbd_getc();
+      if(k!=0)
+         if(k=='*')
+            lcd_putc('\f');
+         else
+            lcd_putc(k);
+
+      //TODO: User Code
+   }
+
+}

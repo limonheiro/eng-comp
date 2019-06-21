@@ -1,0 +1,15 @@
+#include <ponte_h.h>
+
+void main()
+{
+   output_low(PIN_C4);
+   output_high(PIN_C5);
+   
+   while(TRUE)
+   {
+      delay_ms(2000);
+      output_toggle(PIN_C4);
+      output_toggle(PIN_C5);
+   }
+
+}
