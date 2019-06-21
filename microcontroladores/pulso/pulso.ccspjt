@@ -1,0 +1,23 @@
+[PROJECT]
+Target=pulso.hex
+Processor_Text=PIC12F675
+CCSVerions=5.008
+Compiler=PCM
+CCSVersion=5.008
+[Target Data]
+FileList=pulso.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[C:\Users\sky\Documents\CCS C Projects\pulso\pulso]
+Type=4
+[mru-list]
+1=pulso.c
+[Opened Files]
+1=pulso.c
+2=pulso.h
+3=
+[pulso.c]
+Type=4
+[Units]
+Count=1
+1=pulso (main)

@@ -1,0 +1,237 @@
+CCS PCM C Compiler, Version 5.008, 5967               24-abr-19 01:23
+
+               Filename:   C:\Users\sky\Documents\CCS C Projects\pulso\pulso.lst
+
+               ROM used:   191 words (19%)
+                           Largest free fragment is 833
+               RAM used:   6 (9%) at main() level
+                           15 (23%) worst case
+               Stack used: 2 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   004
+0003:  NOP
+0004:  CALL   3FF
+0005:  BSF    03.5
+0006:  MOVWF  10
+0007:  MOVLW  00
+0008:  MOVWF  0A
+0009:  GOTO   084
+.................... #include <12F675.h> 
+.................... //////// Standard Header file for the PIC12F675 device //////////////// 
+.................... #device PIC12F675 
+*
+002C:  MOVF   04,W
+002D:  MOVWF  2D
+002E:  SWAPF  27,W
+002F:  IORLW  F0
+0030:  MOVWF  29
+0031:  ADDWF  29,F
+0032:  ADDLW  E2
+0033:  MOVWF  2A
+0034:  ADDLW  32
+0035:  MOVWF  2C
+0036:  MOVF   27,W
+0037:  ANDLW  0F
+0038:  ADDWF  2A,F
+0039:  ADDWF  2A,F
+003A:  ADDWF  2C,F
+003B:  ADDLW  E9
+003C:  MOVWF  2B
+003D:  ADDWF  2B,F
+003E:  ADDWF  2B,F
+003F:  SWAPF  26,W
+0040:  ANDLW  0F
+0041:  ADDWF  2B,F
+0042:  ADDWF  2C,F
+0043:  RLF    2B,F
+0044:  RLF    2C,F
+0045:  COMF   2C,F
+0046:  RLF    2C,F
+0047:  MOVF   26,W
+0048:  ANDLW  0F
+0049:  ADDWF  2C,F
+004A:  RLF    29,F
+004B:  MOVLW  07
+004C:  MOVWF  28
+004D:  MOVLW  0A
+004E:  ADDWF  2C,F
+004F:  DECF   2B,F
+0050:  BTFSS  03.0
+0051:  GOTO   04E
+0052:  ADDWF  2B,F
+0053:  DECF   2A,F
+0054:  BTFSS  03.0
+0055:  GOTO   052
+0056:  ADDWF  2A,F
+0057:  DECF   29,F
+0058:  BTFSS  03.0
+0059:  GOTO   056
+005A:  ADDWF  29,F
+005B:  DECF   28,F
+005C:  BTFSS  03.0
+005D:  GOTO   05A
+005E:  MOVLW  28
+005F:  MOVWF  04
+0060:  MOVLW  07
+0061:  ANDWF  2D,W
+0062:  BCF    2D.6
+0063:  ADDWF  04,F
+0064:  MOVLW  2C
+0065:  SUBWF  04,W
+0066:  BTFSC  03.2
+0067:  BSF    2D.6
+0068:  MOVF   00,W
+0069:  MOVWF  20
+006A:  BTFSS  03.2
+006B:  GOTO   074
+006C:  BTFSC  2D.6
+006D:  GOTO   074
+006E:  BTFSC  2D.4
+006F:  GOTO   080
+0070:  BTFSC  2D.3
+0071:  GOTO   074
+0072:  MOVLW  20
+0073:  GOTO   077
+0074:  BSF    2D.3
+0075:  BCF    2D.4
+0076:  MOVLW  30
+0077:  ADDWF  20,F
+0078:  CLRF   27
+0079:  MOVF   04,W
+007A:  MOVWF  26
+007B:  MOVF   20,W
+007C:  MOVWF  2E
+007D:  CALL   00A
+007E:  MOVF   26,W
+007F:  MOVWF  04
+0080:  INCF   04,F
+0081:  BTFSS  2D.6
+0082:  GOTO   064
+0083:  GOTO   0B7 (RETURN)
+....................  
+.................... #list 
+....................  
+.................... #device ADC=16 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+....................  
+.................... #use delay(internal=4MHz) 
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_A1,rcv=PIN_A2,bits=8,stream=PORT1) 
+*
+000A:  BSF    03.5
+000B:  BCF    05.1
+000C:  BCF    03.5
+000D:  BCF    05.1
+000E:  MOVLW  08
+000F:  MOVWF  21
+0010:  GOTO   011
+0011:  NOP
+0012:  BSF    21.7
+0013:  GOTO   022
+0014:  BCF    21.7
+0015:  RRF    2E,F
+0016:  BTFSC  03.0
+0017:  BSF    05.1
+0018:  BTFSS  03.0
+0019:  BCF    05.1
+001A:  BSF    21.6
+001B:  GOTO   022
+001C:  BCF    21.6
+001D:  DECFSZ 21,F
+001E:  GOTO   015
+001F:  GOTO   020
+0020:  NOP
+0021:  BSF    05.1
+0022:  MOVLW  1C
+0023:  MOVWF  04
+0024:  DECFSZ 04,F
+0025:  GOTO   024
+0026:  GOTO   027
+0027:  BTFSC  21.7
+0028:  GOTO   014
+0029:  BTFSC  21.6
+002A:  GOTO   01C
+002B:  RETURN
+.................... int16 pulso; 
+....................  
+.................... void main() 
+*
+0084:  MOVF   03,W
+0085:  ANDLW  1F
+0086:  MOVWF  03
+0087:  BSF    03.5
+0088:  BCF    05.1
+0089:  BCF    03.5
+008A:  BSF    05.1
+008B:  BCF    1F.6
+008C:  BSF    03.5
+008D:  BCF    1F.0
+008E:  BCF    1F.1
+008F:  BCF    1F.2
+0090:  BCF    1F.3
+0091:  MOVLW  07
+0092:  BCF    03.5
+0093:  MOVWF  19
+.................... { 
+....................    setup_adc_ports(sAN0); 
+0094:  BCF    1F.6
+0095:  BSF    03.5
+0096:  BSF    1F.0
+0097:  BCF    1F.1
+0098:  BCF    1F.2
+0099:  BCF    1F.3
+....................    setup_adc(ADC_CLOCK_DIV_2); 
+009A:  BCF    1F.4
+009B:  BCF    1F.5
+009C:  BCF    1F.6
+009D:  BCF    03.5
+009E:  BCF    1F.7
+009F:  BSF    1F.0
+....................    setup_adc( ADC_CLOCK_INTERNAL );  
+00A0:  BSF    03.5
+00A1:  BSF    1F.4
+00A2:  BSF    1F.5
+00A3:  BCF    1F.6
+00A4:  BCF    03.5
+00A5:  BCF    1F.7
+00A6:  BSF    1F.0
+....................  
+....................    while(TRUE) 
+....................    { 
+....................       pulso = read_adc(); 
+00A7:  BSF    1F.1
+00A8:  BTFSC  1F.1
+00A9:  GOTO   0A8
+00AA:  BSF    03.5
+00AB:  MOVF   1E,W
+00AC:  BCF    03.5
+00AD:  MOVWF  24
+00AE:  MOVF   1E,W
+00AF:  MOVWF  25
+....................       fprintf(PORT1, "%lu\n\r",pulso); 
+00B0:  MOVLW  10
+00B1:  MOVWF  04
+00B2:  MOVF   25,W
+00B3:  MOVWF  27
+00B4:  MOVF   24,W
+00B5:  MOVWF  26
+00B6:  GOTO   02C
+00B7:  MOVLW  0A
+00B8:  MOVWF  2E
+00B9:  CALL   00A
+00BA:  MOVLW  0D
+00BB:  MOVWF  2E
+00BC:  CALL   00A
+00BD:  GOTO   0A7
+....................    } 
+....................  
+.................... } 
+00BE:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3FA4   INTRC_IO NOWDT PUT MCLR NOBROWNOUT NOPROTECT NOCPD

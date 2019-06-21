@@ -1,0 +1,71 @@
+#include <teclado.h>
+
+#define use_portb_kbd TRUE
+#include <key_awm4x4.c>
+
+#define LCD_RS_PIN      PIN_B0                                    ////
+#define LCD_RW_PIN      PIN_B1                                    ////
+#define LCD_ENABLE_PIN  PIN_B2                                    ////
+#define LCD_DATA4       PIN_B3                                    ////
+#define LCD_DATA5       PIN_B4                                    ////
+#define LCD_DATA6       PIN_B5                                    ////
+#define LCD_DATA7       PIN_B6 
+#include <lcd.c>
+
+int16 tempo=100;
+int16 cont=0;
+int i = 0;
+int passo[4] = {0b00000001, 0b0000100, 0b0000010, 0b00001000};
+
+#INT_RTCC
+void  RTCC_isr(void) 
+{
+
+   cont++;
+   if(cont >= tempo){
+      output_A(passo[i]);
+      i++;
+      if (i > 3) {
+         i = 0;
+      }  
+        cont = 0;
+   }
+
+}
+unsigned int16 v;
+
+void main()
+{
+   setup_adc(ADC_CLOCK_DIV_32);
+   setup_adc_ports(AN0);
+   set_adc_channel(0);
+   setup_timer_2(T2_DIV_BY_16,250,1);      //819 us overflow, 819 us interrupt
+   setup_ccp1(CCP_PWM);
+   setup_comparator(NC_NC_NC_NC);
+   setup_timer_0(RTCC_INTERNAL|RTCC_DIV_16|RTCC_8_BIT);      //1,6 ms overflow
+   
+   delay_ms(100);
+   
+   kbd_init();
+
+   lcd_init();
+
+      
+   char c;  
+   
+   while(true){
+      c = kbd_getc();
+      v = read_adc();
+      set_pwm1_duty(v);
+      
+      //int16 v= (int16) i/1023 *100;
+      
+      printf(lcd_putc, "\fMotor 1: %lu  \n",v);
+      delay_ms(1);
+      if(c!=0){
+         printf(lcd_putc, "%c", c);
+         delay_ms(2000);
+      }
+      
+   }
+}

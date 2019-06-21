@@ -1,0 +1,24 @@
+[PROJECT]
+Target=projeto2.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.008
+Compiler=PCM
+CCSVersion=5.008
+[Target Data]
+FileList=projeto2.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\sky\Documents\CCS C Projects\projeto02_teclado_lcd_motores\
+[C:\Users\sky\Documents\CCS C Projects\projeto02_teclado_lcd_motores\projeto2]
+Type=4
+[mru-list]
+1=projeto2.c
+[Opened Files]
+1=projeto2.c
+2=
+3=projeto2.h
+4=
+[projeto2.c]
+Type=4
+[Units]
+Count=1
+1=projeto2 (main)

@@ -1,0 +1,26 @@
+[PROJECT]
+Target=C:\Users\usuario\Documents\Microcontroladores\Teclado_Matricial\teclado.hex
+Development_Mode=
+Processor_Text=PIC16F877A
+ToolSuite=CCS
+Processor=0x877A
+[C:\Users\usuario\Documents\Microcontroladores\Teclado_Matricial\teclado]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+[mru-list]
+1=C:\Users\usuario\Documents\Microcontroladores\Teclado_Matricial\teclado.c
+[Windows]
+0=0000 %S 0 0 796 451 3 0
+[Units]
+Link=0
+Count=1
+1=C:\Users\usuario\Documents\Microcontroladores\Teclado_Matricial\teclado
+[Opened Files]
+1=teclado.c
+2=
+3=
+4=

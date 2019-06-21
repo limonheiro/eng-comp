@@ -1,0 +1,56 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+019.6   C1OUT
+020     @SCRATCH
+021     @SCRATCH
+021     _RETURN_
+022     @SCRATCH
+023     @SCRATCH
+024-025 pulso
+026-027 @PRINTF_LU_519.P1
+028     @PRINTF_LU_519.@SCRATCH1
+029     @PRINTF_LU_519.@SCRATCH2
+02A     @PRINTF_LU_519.@SCRATCH3
+02B     @PRINTF_LU_519.@SCRATCH4
+02C     @PRINTF_LU_519.@SCRATCH5
+02D     @PRINTF_LU_519.@SCRATCH6
+02E     @PUTCHAR_1_.P1
+09B-09C @READ_PROGRAM_MEMORY8.P1
+
+ROM Allocation:
+00000A  @PUTCHAR_1_
+00002C  @PRINTF_LU_519
+000084  main
+000084  @cinit1
+000094  @cinit2
+
+Project Directory:
+    C:\Users\sky\Documents\CCS C Projects\pulso\
+
+Project Files:
+    pulso.c                                                 [24-abr-19 01:23  CRC=58354635]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\12F675.h [03-jul-13 13:28  CRC=0A49C2E3]
+
+Source signature=6CC8CBFB
+
+Units:
+    pulso (main)
+
+Compiler Settings:
+    Processor:      PIC12F675
+    Pointer Size:   8
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   pulso.xsym
+    Errors:      pulso.err
+    Ext Symbols: pulso.esym
+    INHX8:       pulso.hex
+    Symbols:     pulso.sym
+    List:        pulso.lst
+    Debug/COFF:  pulso.cof
+    Project:     pulso.ccspjt
+    Call Tree:   pulso.tre
+    Statistics:  pulso.STA

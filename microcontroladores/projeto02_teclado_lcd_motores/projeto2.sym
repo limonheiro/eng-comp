@@ -1,0 +1,90 @@
+004-005 @WRITE_PROGRAM_MEMORY8.P1
+004-005 @READ_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1
+015     CCP_1_LOW
+016     CCP_1_HIGH
+01B     CCP_2
+01B     CCP_2_LOW
+01C     CCP_2_HIGH
+021     lcd_init.i
+021     MAIN.@SCRATCH1
+021     @PSTRINGC7_645.@SCRATCH1
+022     lcd_init.@SCRATCH1
+022     @PSTRINGC7_645.@SCRATCH2
+023     @PSTRINGC7_645.@SCRATCH3
+024     @PSTRINGC7_645.@SCRATCH4
+025     lcd_putc.c
+026     @delay_ms1.P1
+026     lcd_gotoxy.x
+027     lcd_gotoxy.y
+028     lcd_gotoxy.address
+029     lcd_gotoxy.@SCRATCH1
+02A     lcd_send_byte.address
+02B     lcd_send_byte.n
+02C     lcd_read_byte.low
+02C     lcd_send_byte.@SCRATCH1
+02D     lcd_send_nibble.n
+02D     lcd_read_byte.high
+02E     lcd_read_nibble.n
+02E     lcd_read_byte.@SCRATCH1
+02F     lcd_read_nibble.@SCRATCH1
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  LCD_INIT_STRING.call
+000008  LCD_INIT_STRING.data
+00000C  @const660.call
+000016  @delay_ms1
+00002A  lcd_send_nibble
+00005A  lcd_read_nibble
+00008B  lcd_send_byte
+000093  lcd_read_byte
+0000E9  lcd_init
+000126  lcd_gotoxy
+000138  lcd_putc
+000164  @PSTRINGC7_645
+0001B1  @cinit1
+0001B1  MAIN
+0001BB  @cinit2
+
+Project Directory:
+    C:\Users\sky\Documents\CCS C Projects\projeto02_teclado_lcd_motores\
+
+Project Files:
+    projeto2.c                                              [10-mai-19 21:54  CRC=47C132C8]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [03-jul-13 13:28  CRC=4E65664C]
+    ..\..\..\..\..\Program Files (x86)\PICC\Drivers\lcd.c   [23-ago-12 08:01  CRC=D28E8746]
+
+Source signature=3B43A7A0
+
+Units:
+    projeto2 (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-1023
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   projeto2.xsym
+    Errors:      projeto2.err
+    Ext Symbols: projeto2.esym
+    INHX8:       projeto2.hex
+    Symbols:     projeto2.sym
+    List:        projeto2.lst
+    Debug/COFF:  projeto2.cof
+    Project:     projeto2.ccspjt
+    Call Tree:   projeto2.tre
+    Statistics:  projeto2.STA

@@ -1,0 +1,7 @@
+юдpulso
+   юдmain  0/59  Ram=0
+      цд@cinit1  (Inline)  Ram=0
+      цд@PRINTF_LU_519  0/88  Ram=8
+      Ё  юд@PUTCHAR_1_  0/34  Ram=1
+      цд@PUTCHAR_1_  0/34  Ram=1
+      юд@PUTCHAR_1_  0/34  Ram=1
