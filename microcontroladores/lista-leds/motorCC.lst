@@ -1,0 +1,163 @@
+CCS PCM C Compiler, Version 5.008, 5967               21-mar-19 14:01
+
+               Filename:   C:\Users\sky\Documents\CCS C Projects\lista-leds\motorCC.lst
+
+               ROM used:   111 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           9 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   01A
+0003:  NOP
+.................... #include <motorCC.h> 
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=10 
+....................  
+.................... #FUSES NOWDT                 	//No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT            	//No brownout reset 
+.................... #FUSES NOLVP                 	//No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=20000000) 
+0004:  MOVLW  23
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   017
+000A:  MOVLW  06
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  7B
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  DECFSZ 00,F
+0016:  GOTO   00A
+0017:  BCF    0A.3
+0018:  BCF    0A.4
+0019:  GOTO   06D (RETURN)
+....................  
+....................  
+....................  
+.................... void main() 
+001A:  MOVF   03,W
+001B:  ANDLW  1F
+001C:  MOVWF  03
+001D:  MOVLW  FF
+001E:  MOVWF  20
+001F:  BSF    03.5
+0020:  BSF    1F.0
+0021:  BSF    1F.1
+0022:  BSF    1F.2
+0023:  BCF    1F.3
+0024:  MOVLW  07
+0025:  MOVWF  1C
+0026:  BCF    03.7
+.................... { 
+....................    setup_adc_ports(AN0); 
+0027:  BCF    1F.0
+0028:  BSF    1F.1
+0029:  BSF    1F.2
+002A:  BSF    1F.3
+....................    setup_adc(ADC_CLOCK_INTERNAL); 
+002B:  BCF    1F.6
+002C:  BCF    03.5
+002D:  BSF    1F.6
+002E:  BSF    1F.7
+002F:  BSF    03.5
+0030:  BSF    1F.7
+0031:  BCF    03.5
+0032:  BSF    1F.0
+....................    setup_timer_2(T2_DIV_BY_16,255,1);      //819 us overflow, 819 us interrupt 
+0033:  MOVLW  00
+0034:  MOVWF  78
+0035:  IORLW  06
+0036:  MOVWF  12
+0037:  MOVLW  FF
+0038:  BSF    03.5
+0039:  MOVWF  12
+....................  
+....................    setup_ccp1(CCP_PWM); 
+003A:  BCF    03.5
+003B:  BCF    20.2
+003C:  MOVF   20,W
+003D:  BSF    03.5
+003E:  MOVWF  07
+003F:  BCF    03.5
+0040:  BCF    07.2
+0041:  MOVLW  0C
+0042:  MOVWF  17
+....................    set_pwm1_duty((int16)512); 
+0043:  MOVLW  80
+0044:  MOVWF  15
+0045:  MOVF   17,W
+0046:  ANDLW  CF
+0047:  MOVWF  17
+....................  
+....................    int16 value; 
+....................     
+....................    while(TRUE) 
+....................    { 
+....................       value = read_adc(); 
+0048:  BSF    1F.2
+0049:  BTFSC  1F.2
+004A:  GOTO   049
+004B:  BSF    03.5
+004C:  MOVF   1E,W
+004D:  BCF    03.5
+004E:  MOVWF  21
+004F:  MOVF   1E,W
+0050:  MOVWF  22
+....................       delay_us(50); 
+0051:  MOVLW  52
+0052:  MOVWF  77
+0053:  DECFSZ 77,F
+0054:  GOTO   053
+0055:  GOTO   056
+0056:  NOP
+....................       set_pwm1_duty(value); 
+0057:  MOVF   22,W
+0058:  MOVWF  79
+0059:  MOVF   21,W
+005A:  MOVWF  78
+005B:  RRF    79,F
+005C:  RRF    78,F
+005D:  RRF    79,F
+005E:  RRF    78,F
+005F:  RRF    79,F
+0060:  MOVF   78,W
+0061:  MOVWF  15
+0062:  RRF    79,F
+0063:  RRF    79,W
+0064:  ANDLW  30
+0065:  MOVWF  77
+0066:  MOVF   17,W
+0067:  ANDLW  CF
+0068:  IORWF  77,W
+0069:  MOVWF  17
+....................       delay_ms((int16)50); 
+006A:  MOVLW  32
+006B:  MOVWF  23
+006C:  GOTO   004
+006D:  GOTO   048
+....................    } 
+....................  
+.................... } 
+006E:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

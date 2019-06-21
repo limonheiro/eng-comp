@@ -1,0 +1,20 @@
+[PROJECT]
+Target=C:\Users\sky\Documents\CCS C Projects\i2c\i2c.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.008
+Compiler=PCM
+[Target Data]
+FileList=i2c.c
+[Directories]
+Include=
+[C:\Users\sky\Documents\CCS C Projects\i2c\i2c]
+Type=4
+[mru-list]
+1=i2c.c
+[Units]
+Count=1
+1=i2c (main)
+[Opened Files]
+1=i2c.c
+2=SSD1306OLED.c
+3=

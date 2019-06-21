@@ -1,0 +1,129 @@
+CCS PCM C Compiler, Version 5.008, 5967               21-mar-19 17:36
+
+               Filename:   C:\Users\sky\Documents\CCS C Projects\led_tx_rx\led_tx_rx.lst
+
+               ROM used:   75 words (1%)
+                           Largest free fragment is 2048
+               RAM used:   6 (2%) at main() level
+                           7 (2%) worst case
+               Stack used: 1 locations
+               Stack size: 8
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   018
+0003:  NOP
+.................... #include <16F877A.h> 
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+....................  
+.................... #list 
+....................  
+.................... #device ADC=10 
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES NOBROWNOUT               //No brownout reset 
+.................... #FUSES NOLVP                    //No low voltage prgming, B3(PIC16) or B5(PIC18) used for I/O 
+....................  
+.................... #use delay(crystal=20MHz) 
+0004:  MOVLW  22
+0005:  MOVWF  04
+0006:  BCF    03.7
+0007:  MOVF   00,W
+0008:  BTFSC  03.2
+0009:  GOTO   017
+000A:  MOVLW  06
+000B:  MOVWF  78
+000C:  CLRF   77
+000D:  DECFSZ 77,F
+000E:  GOTO   00D
+000F:  DECFSZ 78,F
+0010:  GOTO   00C
+0011:  MOVLW  7B
+0012:  MOVWF  77
+0013:  DECFSZ 77,F
+0014:  GOTO   013
+0015:  DECFSZ 00,F
+0016:  GOTO   00A
+0017:  RETURN
+.................... #use rs232(baud=9600,parity=N,xmit=PIN_C6,rcv=PIN_C7,bits=8,stream=PORT1) 
+....................  
+....................  
+.................... #define button pin_b0 
+.................... #define led pin_b1 
+....................  
+.................... void main() 
+0018:  MOVF   03,W
+0019:  ANDLW  1F
+001A:  MOVWF  03
+001B:  MOVLW  81
+001C:  BSF    03.5
+001D:  MOVWF  19
+001E:  MOVLW  A6
+001F:  MOVWF  18
+0020:  MOVLW  90
+0021:  BCF    03.5
+0022:  MOVWF  18
+0023:  BSF    03.5
+0024:  BSF    1F.0
+0025:  BSF    1F.1
+0026:  BSF    1F.2
+0027:  BCF    1F.3
+0028:  MOVLW  07
+0029:  MOVWF  1C
+002A:  BCF    03.7
+.................... { 
+....................    char letra; 
+....................  
+....................    while(TRUE) 
+....................    { 
+....................       if(input(button)){ 
+002B:  BSF    06.0
+002C:  BCF    03.5
+002D:  BTFSS  06.0
+002E:  GOTO   036
+....................          printf("a"); 
+002F:  MOVLW  61
+0030:  BTFSS  0C.4
+0031:  GOTO   030
+0032:  MOVWF  19
+....................          delay_ms(5); 
+0033:  MOVLW  05
+0034:  MOVWF  22
+0035:  CALL   004
+....................       } 
+....................       if(kbhit()) 
+0036:  BTFSS  0C.5
+0037:  GOTO   048
+....................       { 
+....................          letra=getc(); 
+0038:  BTFSS  0C.5
+0039:  GOTO   038
+003A:  MOVF   1A,W
+003B:  MOVWF  21
+....................          if(letra=='a'){ 
+003C:  MOVF   21,W
+003D:  SUBLW  61
+003E:  BTFSS  03.2
+003F:  GOTO   048
+....................             output_toggle(led); 
+0040:  BSF    03.5
+0041:  BCF    06.1
+0042:  MOVLW  02
+0043:  BCF    03.5
+0044:  XORWF  06,F
+....................             delay_ms(5); 
+0045:  MOVLW  05
+0046:  MOVWF  22
+0047:  CALL   004
+....................          } 
+....................       } 
+0048:  BSF    03.5
+0049:  GOTO   02B
+....................    } 
+.................... } 
+004A:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F32   HS NOWDT PUT NOBROWNOUT NOLVP NOCPD NOWRT NODEBUG NOPROTECT

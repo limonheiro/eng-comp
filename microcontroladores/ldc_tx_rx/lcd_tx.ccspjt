@@ -1,0 +1,19 @@
+[PROJECT]
+Target=C:\Users\sky\Documents\CCS C Projects\ldc_tx_rx\lcd_tx.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.008
+Compiler=PCM
+[Target Data]
+FileList=lcd_tx.c
+[Directories]
+Include=
+[C:\Users\sky\Documents\CCS C Projects\ldc_tx_rx\lcd_tx]
+Type=4
+[mru-list]
+1=lcd_tx.c
+[Units]
+Count=1
+1=lcd_tx (main)
+[Opened Files]
+1=lcd_tx.c
+2=

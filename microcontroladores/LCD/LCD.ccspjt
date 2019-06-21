@@ -1,0 +1,23 @@
+[PROJECT]
+Target=LCD.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.008
+Compiler=PCM
+CCSVersion=5.008
+[Target Data]
+FileList=LCD.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\;C:\Users\sky\Documents\CCS C Projects\LCD\
+[C:\Users\sky\Documents\CCS C Projects\LCD\LCD]
+Type=4
+[mru-list]
+1=LCD.c
+[Opened Files]
+1=LCD.c
+2=mod_lcd.h
+3=
+[LCD.c]
+Type=4
+[Units]
+Count=1
+1=LCD (main)

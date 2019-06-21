@@ -1,0 +1,87 @@
+004-005 @READ_PROGRAM_MEMORY8.P1
+004-005 @WRITE_PROGRAM_MEMORY8.P2
+008     PSP_DATA
+015     CCP_1_LOW
+015     CCP_1
+016     CCP_1_HIGH
+01B     CCP_2_LOW
+01B     CCP_2
+01C     CCP_2_HIGH
+021     lcd_ini.conta
+021     MAIN.@SCRATCH1
+021     @PSTRINGC7_635.@SCRATCH1
+022     lcd_ini.@SCRATCH1
+022     @PSTRINGC7_635.@SCRATCH2
+023     @PSTRINGC7_635.@SCRATCH3
+024     @PSTRINGC7_635.@SCRATCH4
+025     lcd_escreve.c
+026     lcd_pos_xy.x
+026     @delay_ms1.P1
+027     lcd_pos_xy.y
+028     lcd_pos_xy.endereco
+029     lcd_pos_xy.@SCRATCH1
+02A     lcd_envia_byte.endereco
+02B     lcd_envia_byte.dado
+02C     lcd_envia_byte.@SCRATCH1
+02D     lcd_envia_nibble.dado
+077     @SCRATCH
+078     @SCRATCH
+078     _RETURN_
+079     @SCRATCH
+07A     @SCRATCH
+09C.6   C1OUT
+09C.7   C2OUT
+10D-10E @WRITE_PROGRAM_MEMORY8.P1
+10D-10E @READ_PROGRAM_MEMORY8.P2
+
+ROM Allocation:
+000004  INI_LCD.call
+000008  INI_LCD.data
+00000C  @const644.call
+000015  @const646.call
+00001B  @const647.call
+000021  @const648.call
+000024  @delay_ms1
+000038  lcd_envia_nibble
+00005F  lcd_envia_byte
+000080  lcd_ini
+0000BD  lcd_pos_xy
+0000CF  lcd_escreve
+0000F6  @PSTRINGC7_635
+000141  @cinit1
+000141  MAIN
+00014B  @cinit2
+
+Project Directory:
+    C:\Users\sky\Documents\CCS C Projects\LCD\
+
+Project Files:
+    LCD.c                                                   [21-mar-19 14:06  CRC=5D16CF66]
+    LCD.h                                                   [21-mar-19 14:06  CRC=CF12E969]
+    ..\..\..\..\..\Program Files (x86)\PICC\Devices\16F877A.h [03-jul-13 13:28  CRC=4E65664C]
+    mod_lcd.h                                               [10-mai-19 14:32  CRC=027A2D1A]
+
+Source signature=7F83794F
+
+Units:
+    LCD (main)
+
+Compiler Settings:
+    Processor:      PIC16F877A
+    Pointer Size:   16
+    ADC Range:      0-65535
+    Opt Level:      9
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    XREF file:   LCD.xsym
+    Errors:      LCD.err
+    Ext Symbols: LCD.esym
+    INHX8:       LCD.hex
+    Symbols:     LCD.sym
+    List:        LCD.lst
+    Debug/COFF:  LCD.cof
+    Project:     LCD.ccspjt
+    Call Tree:   LCD.tre
+    Statistics:  LCD.STA

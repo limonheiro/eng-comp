@@ -1,0 +1,22 @@
+[PROJECT]
+Target=led_tx_rx.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.008
+Compiler=PCM
+CCSVersion=5.008
+[Target Data]
+FileList=led_tx_rx.c
+[Directories]
+Include=C:\Program Files (x86)\PICC\Devices\;C:\Program Files (x86)\PICC\Drivers\
+[C:\Users\sky\Documents\CCS C Projects\led_tx_rx\led_tx_rx]
+Type=4
+[mru-list]
+1=led_tx_rx.c
+[Opened Files]
+1=led_tx_rx.c
+2=
+[led_tx_rx.c]
+Type=4
+[Units]
+Count=1
+1=led_tx_rx (main)
